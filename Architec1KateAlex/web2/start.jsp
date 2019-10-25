@@ -27,7 +27,12 @@
 (<a href="addSchedule">добавить</a>)
 <c:forEach items="${allSchedule}" var="one">
     <li>
-        Хобби: ${one.hobbyid}
+        Хобби:
+        <c:forEach items="${allHobby}" var="hobby">
+        <c:if test="${hobby.id==one.hobbyid}">
+            ${hobby.name}
+        </c:if>
+        </c:forEach>
         Дата и время: ${one.localDateTime}
         Оценка: ${one.mark}
         Завершено?: ${one.complete}

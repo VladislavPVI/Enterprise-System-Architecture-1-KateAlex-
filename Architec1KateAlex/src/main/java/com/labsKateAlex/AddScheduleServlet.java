@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @WebServlet("/addSchedule")
 public class AddScheduleServlet extends HttpServlet {
     @EJB
     private ScheduleBean scheduleBean;
+    @EJB
+    private HobbyBean hobbyBean;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -25,8 +28,12 @@ public class AddScheduleServlet extends HttpServlet {
         if (req.getParameter("edit") != null) {
             long id = Long.valueOf(req.getParameter("edit"));
             Schedule schedule = scheduleBean.get(id);
+            Hobby hobby = hobbyBean.get(schedule.getHobbyid());
+            req.setAttribute("hobby_name", hobby.getName());
             req.setAttribute("schedule", schedule);
         }
+        List<Hobby> allHobby = hobbyBean.getAll();
+        req.setAttribute("allHobby",allHobby);
         req.getRequestDispatcher("/addSchedule.jsp").forward(req, resp);
 
     }

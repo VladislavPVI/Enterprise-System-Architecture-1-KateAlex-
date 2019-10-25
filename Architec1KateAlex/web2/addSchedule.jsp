@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: otori
@@ -12,9 +13,14 @@
 </head>
 <body>
 <form action="addSchedule" method="post">
-    <label for="hobbyid">Введите хобби:
-        <input type="text" id="hobbyid" value="${schedule.hobbyid}" name="hobbyid" />
-    </label>  <br />
+    Название хобби: ${hobby_name}
+    <select name="hobbyid" required>
+        <option value="${schedule.hobbyid}">Изменить</option>
+        <c:forEach items="${allHobby}" var="hobby">
+            <option value="${hobby.id}"><c:out value="${hobby.name}" /></option>
+        </c:forEach>
+    </select>
+   <br />
     <label for="datetime">Дата и время:
         <input type="datetime-local" id="datetime" value="${schedule.localDateTime}" name="localDateTime"  />
     </label>  <br />
