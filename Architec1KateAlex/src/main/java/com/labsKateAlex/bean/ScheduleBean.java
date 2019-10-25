@@ -32,4 +32,8 @@ public class ScheduleBean {
         return namedQuery.getResultList();
     }
 
+    public List<Schedule> getByHobby(Long id) {
+        TypedQuery<Schedule> namedQuery = em.createNamedQuery("Schedule.getByHobby",Schedule.class).setParameter("ID", id);
+        return namedQuery.getResultList();
+    }
 }

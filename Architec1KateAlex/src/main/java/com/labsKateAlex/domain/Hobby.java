@@ -1,6 +1,7 @@
 package com.labsKateAlex.domain;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "hobby")
@@ -9,15 +10,16 @@ public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private Long name;
+    private String name;
     private int hoursperweek;
     private int priority;
 
-    public Hobby(Long name, int hoursperweek, int priority) {
+    public Hobby(String name, int hoursperweek, int priority) {
         this.name = name;
         this.hoursperweek = hoursperweek;
         this.priority = priority;
     }
+
 
     public Hobby() {
     }
@@ -27,11 +29,11 @@ public class Hobby {
     }
 
 
-    public Long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
