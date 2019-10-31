@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/start")
@@ -27,6 +31,13 @@ public class MainServlet extends HttpServlet {
         req.setAttribute("allHobby",allHobby);
         List<Schedule> allSchedule = scheduleBean.getAll();
         req.setAttribute("allSchedule",allSchedule);
+        req.setAttribute("now", DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(LocalDate.now()));
+        ArrayList<String> allScheduleToday = new ArrayList<>();
+        for (Schedule i : allSchedule)
+            if(i.getLocalDateTime().toLocalDate().equals(LocalDate.now()))
+                allScheduleToday.add("Хобби: " + hobbyBean.get(i.getHobbyid()).getName()+" Время: "+i.getLocalDateTime().toLocalTime());
+        req.setAttribute("schedule_today",allScheduleToday);
+
         req.getRequestDispatcher("/start.jsp").forward(req,resp);
 
     }

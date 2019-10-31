@@ -8,11 +8,35 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<style>
+
+    .note{
+        background: url(img/note.png) no-repeat;
+        width: 561px;
+        height: 657px;
+        position: absolute;
+        right: 400px;
+        bottom: 200px;
+        box-sizing: border-box;
+        padding: 20px 56px 20px 70px;
+       }
+    body {
+        background: url(img/back2.jpg);
+        background-size: 100%;
+        font-size:20px;
+    }
+
+</style>
 <head>
     <title>Start page</title>
 </head>
-<body>
-<h3>Все хобби</h3>
+
+<header>
+
+    <details>
+        <summary style="font-size:30px">
+            Все хобби
+        </summary>
 (<a href="addHobby">добавить</a>)
 <c:forEach items="${allHobby}" var="hobby">
     <li>
@@ -23,7 +47,12 @@
 
     </li>
 </c:forEach>
-<h3>Все расписание</h3>
+    </details>
+
+<details>
+    <summary style="font-size:30px">
+    Все расписание
+    </summary>
 (<a href="addSchedule">добавить</a>)
 <c:forEach items="${allSchedule}" var="one">
     <li>
@@ -40,5 +69,35 @@
 
     </li>
 </c:forEach>
+</details>
+
+
+    </header>
+<body>
+<div class="note">
+    <p align="center" style="font-size:30px">
+        Привет!
+        Это твой планировщик дня!</p>
+    <p align="center" style="font-weight: bold;">
+        ${now}</p>
+
+    <p align="center" style="font-size:20px">Все дела на сегодня:
+
+        (<a href="addSchedule">добавить</a>)
+    </p>
+    <c:if test="${!empty schedule_today}">
+        <c:forEach items="${schedule_today}" var="today">
+            <li>
+                    ${today}
+            </li>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty schedule_today}">
+
+
+        Сегодня дел нет
+    </c:if>
+</div>
+
 </body>
 </html>
